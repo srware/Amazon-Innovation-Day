@@ -1,7 +1,7 @@
 # Amazon Innovation Day
 
 ## Up Squared Resources
- * [Up Squared Grove IoT Development Kit](#%20Amazon%20Innovation%20Day%20%20##%20Resources%20%20*%20https://software.intel.com/en-us/iot/hardware/up-squared-grove-dev-kit)
+ * [Up Squared Grove IoT Development Kit](https://software.intel.com/en-us/iot/hardware/up-squared-grove-dev-kit)
  * [Up Squared Product Page](http://www.up-board.org/upsquared/)
  * [Up Squared Community](https://forum.up-community.org/categories/up-squared)
  * [Up Board Wiki](https://wiki.up-community.org/Main_Page)
