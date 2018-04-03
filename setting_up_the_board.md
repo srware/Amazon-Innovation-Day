@@ -138,7 +138,7 @@ wlp4s0    Link encap:Ethernet  HWaddr 9c:b6:d0:d3:10:cd
           TX packets:48 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000
 ```
-In this instance both ** ethernet** and **WiFi** are connected and have an IP address of **192.168.1.27** and **192.168.1.233** respectively.
+In this instance both **Ethernet** and **WiFi** are connected and have an IP address of **192.168.1.27** and **192.168.1.233** respectively.
 
 Below is an example of connecting to the board over SSH from **Linux** or **OS X**:
 ``` bash
@@ -156,3 +156,43 @@ sudo apt install ubuntu-desktop
 sudo reboot
 ```
 The board will now reboot into the graphical desktop by default.
+
+### Time Zone Configuration
+The board may not be set to the correct time zone out-of-the-box.
+
+You can check the current time zone configuration using the command below:
+``` bash
+timedatectl
+```
+You will get output like the following...
+``` bash
+Local time: Tue 2018-04-03 07:47:09 EDT
+Universal time: Tue 2018-04-03 11:47:09 UTC
+RTC time: Tue 2018-04-03 11:47:09
+Time zone: America/New_York (EDT, -0400)
+Network time on: yes
+NTP synchronized: yes
+RTC in local TZ: no
+```
+If the time zone is set incorrectly use the following commands to change it.
+
+You can get a list of time zones by issuing the following command
+``` bash
+timedatectl list-timezones
+```
+The list is long but you can use **PgUp** and **PgDown** to navigate it. The format is generally **{Region}/{City}** so for example to update the time zone for the **UK** you can use the following command:
+``` bash
+sudo timedatectl set-timezone Europe/London
+```
+The output from **timedatectl** should now look like this:
+``` bash
+Local time: Tue 2018-04-03 13:00:46 BST
+Universal time: Tue 2018-04-03 12:00:46 UTC
+RTC time: Tue 2018-04-03 12:00:46
+Time zone: Europe/London (BST, +0100)
+Network time on: yes
+NTP synchronized: yes
+RTC in local TZ: no
+```
+> **Note:** The RTC time may still be incorrect. This requires changing in the BIOS but isn't required.
+
