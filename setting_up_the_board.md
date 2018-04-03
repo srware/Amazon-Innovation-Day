@@ -196,3 +196,13 @@ RTC in local TZ: no
 ```
 > **Note:** The RTC time may still be incorrect. This requires changing in the BIOS but isn't required.
 
+## Keyboard Locale
+If your keyboard is mapped incorrectly you can update this from the command-line using the following command:
+``` bash
+sudo dpkg-reconfigure keyboard-configuration
+```
+**Reboot** for changes to take effect.
+
+**Or**
+
+If you are using the **Graphical Desktop** you can go to **System Settings->Keyboard** and click the **Text Entry** button in the bottom left of the window. If your desired locale is not in the **Input sources to use** list use the **+** button to add it and use the arrow buttons to put it to the top of the list.
