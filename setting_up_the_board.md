@@ -1,3 +1,4 @@
+
 # Setting Up The Up Squared Board
 The Up Squared Grove IoT Developer Kit includes the following components:
 
@@ -13,6 +14,11 @@ The Up Squared Grove IoT Developer Kit includes the following components:
  - Micro USB Cable
  - USB Stick
 
+
+## Default Login
+ - Username: **upsquared**
+ - Password: **upsquared**
+
 ## Connections
 There are 2 ways of communicating with the board out-of-the-box:
 
@@ -22,13 +28,28 @@ There are 2 ways of communicating with the board out-of-the-box:
 Follow these [instructions](https://software.intel.com/en-us/upsquared-grove-getting-started-guide-power-on-board) to connect the board. You can substitute the Serial USB connection for a HDMI monitor and USB keyboard if preferred.
 
 ### Serial Connection
-To communicate via serial use your favourite serial console application such as **screen** or **Putty** with a baud rate of **115200**. In Linux the serial device will show up as **/dev/ttyACM***. Below is an example for connecting to the board from **Linux** using **Screen**:
+To communicate via serial use your favourite serial console application such as **Screen** or **Putty** with a baud rate of **115200**. In Linux the serial device will show up as **/dev/ttyACM***. In **OS X** it will be something like **/dev/tty.usbmodem***.
+
+> It is recommended to use SSH to communicate with the board if you are not using a monitor + keyboard. Serial is mainly useful to do initial setup and connect the board to your network.
+
+Below is an example for connecting to the board on **Linux** or an **OS X** bash shell using **Screen**. 
+
+Firstly determine what your serial device is mounted as:
 ``` bash
-sudo screen /dev/ttyACM0 115200
+ls /dev/ttyACM* (Linux)
+ls /dev/tty.usbmodem* (OS X)
+```
+Once you have determined which device is the Up Squared board use the following command to initialise serial communication:
+``` bash
+sudo screen {DEVICE_PATH} 115200
 ```
 > **NOTE:** You may need to hit **Enter** a few times after a connection is established to start getting output in the console window.
 
-### Wireless
+In **Windows** you will need to check which **COM port** your serial device has been assigned. To do this open **Device Manager** and expand the **Ports (COM & LPT)** section. The Up Squared board will be listed as a **USB Serial Device (COM\*)**. Once you have determined which COM port is associated with the board use a tool such as **Putty** to initialise serial communication like in the screenshot below.
+
+![Windows Serial](images/windows_serial.jpg)
+
+### WiFi
 You can purchase the official Up Squared WiFi Kit [here](https://up-shop.org/up-peripherals/109-m2-2230-wifi-kit.html). The WiFi card is connected to the **M.2 2230** slot on the Up Squared board.
 
 You may need to install the **linux-firmware** package before your WiFi adapter is successfully initialised using the command below:
@@ -39,13 +60,52 @@ Install the **wireless-tools** package to install some utilities to make connect
 ``` bash
 sudo apt install wireless-tools
 ```
+You can now use the **iwconfig** tool to connect to a wireless network. Start by making sure your wireless adapter is up and working by running the **iwconfig** command and ensuring your wireless adapter is listed:
+``` bash
+iwconfig
+```
+you should see output similar to this...
+``` bash
+enp2s0    no wireless extensions.
+
+enp3s0    no wireless extensions.
+
+lo        no wireless extensions.
+
+wlp4s0    IEEE 802.11  ESSID:off/any
+          Mode:Managed  Access Point: Not-Associated   Tx-Power=0 dBm
+          Retry short limit:7   RTS thr:off   Fragment thr:off
+          Power Management:on
+```
+The wireless adapter is named **wlp4s0** in this instance.
+
+To connect to a wireless access point use the following commands:
+``` bash
+sudo iwconfig {ADAPTER_NAME} essid {SSID} key {PASSPHRASE}
+sudo ip link set {ADAPTER_NAME} up
+```
+Use  **ifconfig** to make sure your wireless adapter has been assigned an IP address:
+``` bash
+ifconfig
+```
+you should see output similar to this...
+``` bash
+wlp4s0    Link encap:Ethernet  HWaddr 9c:b6:d0:d3:10:cd
+          inet addr:192.168.1.233  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet6 addr: fe80::e122:ec06:fc44:4552/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:11 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:48 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:1414 (1.4 KB)  TX bytes:7516 (7.5 KB)
+```
+If you are having issues connecting make sure you entered the SSID and network key correctly or try rebooting to see if the wireless adapter comes up successfully:
+``` bash
+sudo reboot
+```
 
 ## OS
-The Up Squared board comes pre-installed with Ubuntu Server 16.04.
-
-### Default Login
- - Username: **upsquared**
- - Password: **upsquared**
+The Up Squared board comes pre-installed with Ubuntu Server 16.04
 
 ### Graphical Desktop
 If you require a graphical desktop you can install the default Ubuntu desktop with the following command:
