@@ -27,6 +27,19 @@ To communicate via serial use your favourite serial console application such as 
 sudo screen /dev/ttyACM0 115200
 ```
 > **NOTE:** You may need to hit **Enter** a few times after a connection is established to start getting output in the console window.
+
+### Wireless
+You can purchase the official Up Squared WiFi Kit [here](https://up-shop.org/up-peripherals/109-m2-2230-wifi-kit.html). The WiFi card is connected to the **M.2 2230** slot on the Up Squared board.
+
+You may need to install the **linux-firmware** package before your WiFi adapter is successfully initialised using the command below:
+``` bash
+sudo apt install linux-firmware
+```
+Install the **wireless-tools** package to install some utilities to make connecting to a wireless access point from the command-line easier:
+``` bash
+sudo apt install wireless-tools
+```
+
 ## OS
 The Up Squared board comes pre-installed with Ubuntu Server 16.04.
 
@@ -41,4 +54,3 @@ sudo apt install ubuntu-desktop
 sudo reboot
 ```
 The board will now reboot into the graphical desktop by default.
-
