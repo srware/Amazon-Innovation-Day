@@ -13,3 +13,4 @@
 ##  Guides
 
  - [Setting Up The Up  Squared Board](setting_up_the_board.md)
+ - [Development Setup](development_setup.md)
