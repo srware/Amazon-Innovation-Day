@@ -103,6 +103,48 @@ If you are having issues connecting make sure you entered the SSID and network k
 ``` bash
 sudo reboot
 ```
+### SSH
+The board comes with SSH enabled out-of-the-box so once you have connected it to your network and determined it's IP address you can connect to it with your favourite SSH client.
+
+Determine the IP address using the **ifconfig** utility:
+``` bash
+ifconfig
+```
+You will get output similar to this...
+``` bash
+enp3s0    Link encap:Ethernet  HWaddr 00:07:32:4a:a9:3e
+          inet addr:192.168.1.27  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet6 addr: fe80::207:32ff:fe4a:a93e/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:383 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:148 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:53644 (53.6 KB)  TX bytes:20662 (20.6 KB)
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:200 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:200 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:14826 (14.8 KB)  TX bytes:14826 (14.8 KB)
+
+wlp4s0    Link encap:Ethernet  HWaddr 9c:b6:d0:d3:10:cd
+          inet addr:192.168.1.233  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet6 addr: fe80::e122:ec06:fc44:4552/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:11 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:48 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+```
+In this instance both ** ethernet** and **WiFi** are connected and have an IP address of **192.168.1.27** and **192.168.1.233** respectively.
+
+Below is an example of connecting to the board over SSH from **Linux** or **OS X**:
+``` bash
+ssh upsquared@192.168.1.27
+```
+You will be prompted for the user password which is also **upsquared**.
 
 ## OS
 The Up Squared board comes pre-installed with Ubuntu Server 16.04
