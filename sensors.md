@@ -134,3 +134,165 @@ var lux = light.value();
 
 console.log("Raw value is " + raw + ", which is roughly " + lux + " lux");
 ```
+
+### LED
+The LED socket is a **digital** actuator so needs to be connected to one of the **digital** inputs on the **GrovePi** shield (e.g. **D4**).
+#### Python
+``` python
+import time
+import mraa
+from upm import pyupm_led
+
+# Initialise GrovePi subplatform
+mraa.addSubplatform(mraa.GROVEPI, "0")
+
+# Create the Grove LED object using GPIO pin 4 (D4)
+led = pyupm_led.Led(516)
+
+# Turn the LED on and off 10 times, pausing one second between transitions
+for i in range (0,10):
+    led.on()
+    time.sleep(1)
+    led.off()
+    time.sleep(1)
+```
+#### Node.js
+``` js
+const mraa = require('mraa');
+const ledSensor = require('jsupm_led');
+
+// Initialise GrovePi subplatform
+mraa.addSubplatform(mraa.GROVEPI, "0");
+
+// Create the LED object using GPIO pin 4 (D4)
+var led = new ledSensor.Led(516);
+
+// Turn the LED on and off 10 times, pausing one second between transitions
+var i = 0;
+var waiting = setInterval(function() {
+    if ( i % 2 == 0 ) {
+        led.on();
+    } else {
+        led.off();
+    }
+
+    i++;
+    
+    if ( i == 20 ) clearInterval(waiting);
+    
+}, 1000);
+```
+
+### Button
+The Button is a **digital** actuator so needs to be connected to one of the **digital** inputs on the **GrovePi** shield (e.g. **D4**).
+#### Python
+``` python
+import time
+import mraa
+from upm import pyupm_grove as grove
+
+# Initialise GrovePi subplatform
+mraa.addSubplatform(mraa.GROVEPI, "0")
+
+# Create the button object using GPIO pin 4 (D4)
+button = grove.GroveButton(516)
+
+# Read the input and print, waiting one second between readings
+while 1:
+    print(button.name(), ' value is ', button.value())
+    time.sleep(1)
+```
+#### Node.js
+``` js
+const mraa = require('mraa');
+var upm = require('jsupm_button');
+
+// Initialise GrovePi subplatform
+mraa.addSubplatform(mraa.GROVEPI, "0");
+
+// Create the button object using GPIO pin 4 (D4)
+var button = new upm.Button(516);
+
+// Read the input and print, waiting one second between readings
+function readButtonValue() {
+    console.log(button.name() + " value is " + button.value());
+}
+
+setInterval(readButtonValue, 1000);
+```
+
+
+### Button
+The Button is a **digital** actuator so needs to be connected to one of the **digital** inputs on the **GrovePi** shield (e.g. **D4**).
+#### Python
+``` python
+import time
+import mraa
+from upm import pyupm_grove as grove
+
+# Initialise GrovePi subplatform
+mraa.addSubplatform(mraa.GROVEPI, "0")
+
+# Create the button object using GPIO pin 4 (D4)
+button = grove.GroveButton(516)
+
+# Read the input and print, waiting one second between readings
+while 1:
+    print(button.name(), ' value is ', button.value())
+    time.sleep(1)
+```
+#### Node.js
+``` js
+const mraa = require('mraa');
+var upm = require('jsupm_button');
+
+// Initialise GrovePi subplatform
+mraa.addSubplatform(mraa.GROVEPI, "0");
+
+// Create the button object using GPIO pin 4 (D4)
+var button = new upm.Button(516);
+
+// Read the input and print, waiting one second between readings
+function readButtonValue() {
+    console.log(button.name() + " value is " + button.value());
+}
+
+setInterval(readButtonValue, 1000);
+```
+
+### Temperature & Humidity Sensor
+The Temperature & Humidity sensor is an **I2C** sensor so needs to be connected to one of the **I2C** inputs on the **GrovePi** shield (e.g. **I2C-1**).
+#### Python
+``` python
+import mraa
+from upm import pyupm_si7005 as upm
+
+# Initialise GrovePi subplatform
+mraa.addSubplatform(mraa.GROVEPI, "0")
+
+# Initialise sensor
+sensor = upm.SI7005(0, 512)
+
+temp = sensor.getTemperatureCelsius()
+hum = sensor.getHumidityRelative()
+
+print("Temperature is currently %d" % temp + " C");
+print("Humidity is currently %d" % hum + " %");
+```
+#### Node.js
+``` js
+const mraa = require('mraa');
+const upm = require('jsupm_si7005');
+
+// Initialise GrovePi subplatform
+mraa.addSubplatform(mraa.GROVEPI, "0")
+
+// Initialise sensor
+var sensor = new upm.SI7005(0, 512)
+
+var temp = sensor.getTemperatureCelsius()
+var hum = sensor.getHumidityRelative()
+
+console.log("Temperature is currently " + temp + " C");
+console.log("Humidity is currently " + hum + " %");
+```
