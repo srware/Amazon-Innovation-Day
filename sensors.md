@@ -258,3 +258,6 @@ var hum = sensor.getHumidityRelative()
 console.log("Temperature is currently " + temp + " C");
 console.log("Humidity is currently " + hum + " %");
 ```
+
+## Additional Sensors
+For a list of additional sensors supported by the **UPM** library and sample code for various programming languages go [HERE](https://upm.mraa.io/findSensor.html).
