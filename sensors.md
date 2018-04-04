@@ -16,6 +16,7 @@ The Up Squared also has native IO which is pin compatible with the Raspberry Pi 
 > **Note:** The default **upsquared** user does not have the required privileges to access low-level devices. As such whenever you run code which is accessing a sensor using **MRAA** or **UPM** always run with elevated privileges.
 
 ## Sample Code
+
 ### Grove LCD RGB Backlight
 The LCD screen and RGB backlight is an **I2C** device so needs to be connected to one of the **I2C** connectors on the **GrovePi** shield (e.g. **I2C-2**).
 #### Python
@@ -182,45 +183,6 @@ var waiting = setInterval(function() {
     
 }, 1000);
 ```
-
-### Button
-The Button is a **digital** actuator so needs to be connected to one of the **digital** inputs on the **GrovePi** shield (e.g. **D4**).
-#### Python
-``` python
-import time
-import mraa
-from upm import pyupm_grove as grove
-
-# Initialise GrovePi subplatform
-mraa.addSubplatform(mraa.GROVEPI, "0")
-
-# Create the button object using GPIO pin 4 (D4)
-button = grove.GroveButton(516)
-
-# Read the input and print, waiting one second between readings
-while 1:
-    print(button.name(), ' value is ', button.value())
-    time.sleep(1)
-```
-#### Node.js
-``` js
-const mraa = require('mraa');
-var upm = require('jsupm_button');
-
-// Initialise GrovePi subplatform
-mraa.addSubplatform(mraa.GROVEPI, "0");
-
-// Create the button object using GPIO pin 4 (D4)
-var button = new upm.Button(516);
-
-// Read the input and print, waiting one second between readings
-function readButtonValue() {
-    console.log(button.name() + " value is " + button.value());
-}
-
-setInterval(readButtonValue, 1000);
-```
-
 
 ### Button
 The Button is a **digital** actuator so needs to be connected to one of the **digital** inputs on the **GrovePi** shield (e.g. **D4**).
