@@ -34,6 +34,21 @@ myLcd.setCursor(1,2)
 myLcd.write('Hello World')
 ```
 #### Node.js
+``` js
+// Load LCD module on I2C
+var LCD = require('jsupm_jhd1313m1');
+
+# Initialise JHD1313 at 0x3E (LCD_ADDRESS) and 0x62 (RGB_ADDRESS)
+var myLcd = new LCD.Jhd1313m1 (0, 0x3E, 0x62);
+
+// RGB Red
+myLcd.setColor(255, 0, 0);
+
+myLcd.setCursor(0,0);
+myLcd.write('Hello World');
+myLcd.setCursor(1,2);
+myLcd.write('Hello World');
+```
 
 ### Rotary Angle Sensor
 The Rotary Angle Sensor is an **analog** device so needs to be connected to one of the **analog** inputs on the **GrovePi** shield (e.g. **A0**).
@@ -62,3 +77,60 @@ print("Absolute values | Raw: %4d" % int(abs), " Degrees: %3d" % int(absdeg), " 
 print("Relative values | Raw: %4d" % int(rel) , " Degrees: %3d" % int(reldeg), " Radian: %5.2f" % relrad)
 ```
 #### Node.js
+``` js
+const mraa = require('mraa');
+const grove = require('jsupm_grove');
+
+// Initialise GrovePi subplatform
+mraa.addSubplatform(mraa.GROVEPI, "0");
+
+// New rotary sensor on AIO pin 0
+var groveRotary = new grove.GroveRotary(512);
+
+var abs = groveRotary.abs_value();
+var absdeg = groveRotary.abs_deg();
+var absrad = groveRotary.abs_rad();
+
+var rel = groveRotary.rel_value();
+var reldeg = groveRotary.rel_deg();
+var relrad = groveRotary.rel_rad();
+
+
+console.log("Absolute: " + abs + " " + Math.round(parseInt(absdeg)) + " " + absrad.toFixed(3));
+console.log("Relative: " + rel + " " + Math.round(parseInt(reldeg)) + " " + relrad.toFixed(3));
+```
+
+### Grove Light Sensor
+The Grove Light Sensor is an **analog** device so needs to be connected to one of the **analog** inputs on the **GrovePi** shield (e.g. **A0**).
+#### Python
+``` python
+import mraa
+from upm import pyupm_grove as grove
+
+# Initialise GrovePi subplatform
+mraa.addSubplatform(mraa.GROVEPI, "0")
+
+# Create a light sensor object using AIO pin 0
+light = grove.GroveLight(512)
+
+raw = light.raw_value()
+lux = light.value();
+
+print("Raw value is %d" % raw + ", which is roughly %d" % lux + " lux");
+```
+#### Node.js
+``` js
+const mraa = require('mraa');
+const grove = require('jsupm_grove');
+
+// Initialise GrovePi subplatform
+mraa.addSubplatform(mraa.GROVEPI, "0");
+
+// Create the light sensor object using AIO pin 0
+var light = new grove.GroveLight(512);
+
+var raw = light.raw_value();
+var lux = light.value();
+
+console.log("Raw value is " + raw + ", which is roughly " + lux + " lux");
+```
