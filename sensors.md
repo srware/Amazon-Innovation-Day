@@ -16,6 +16,7 @@ The Up Squared also has native IO which is pin compatible with the Raspberry Pi 
 > **Note:** The default **upsquared** user does not have the required privileges to access low-level devices. As such whenever you run code which is accessing a sensor using **MRAA** or **UPM** always run with elevated privileges.
 
 ## Sample Code
+> Ensure you have [installed the required packages](development_setup.md) for your preferred programming language before continuing.
 
 ### Grove LCD RGB Backlight
 The LCD screen and RGB backlight is an **I2C** device so needs to be connected to one of the **I2C** connectors on the **GrovePi** shield (e.g. **I2C-2**).
