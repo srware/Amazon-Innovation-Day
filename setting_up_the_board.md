@@ -1,4 +1,5 @@
 
+
 # Setting Up The Up Squared Board
 The Up Squared Grove IoT Developer Kit includes the following components:
 
@@ -56,53 +57,22 @@ You may need to install the **linux-firmware** package before your WiFi adapter 
 ``` bash
 sudo apt install linux-firmware
 ```
-Install the **wireless-tools** package to install some utilities to make connecting to a wireless access point from the command-line easier:
-``` bash
-sudo apt install wireless-tools
-```
-You can now use the **iwconfig** tool to connect to a wireless network. Start by making sure your wireless adapter is up and working by running the **iwconfig** command and ensuring your wireless adapter is listed:
-``` bash
-iwconfig
-```
-you should see output similar to this...
-``` bash
-enp2s0    no wireless extensions.
 
-enp3s0    no wireless extensions.
+There are a number of ways to get connected to a wireless network from the command-line but I would recommend installing **Network Manager** to handle all networking on the device. The main advantage is you get some nice command-line utilities which make managing wired and wireless networks relatively simple such as **nmcli** and the interactive version **nmtui**.
 
-lo        no wireless extensions.
+Firstly install Network Manager:
+``` bash
+sudo apt install network-manager
+```
+Retrieve a list of available wireless access points using the following command:
+``` bash
+nmcli dev wifi
+```
+You can then connect to your wireless access point using the following command:
+``` bash
+sudo nmcli dev wifi connect {SSID} password {PASSWORD}
+```
 
-wlp4s0    IEEE 802.11  ESSID:off/any
-          Mode:Managed  Access Point: Not-Associated   Tx-Power=0 dBm
-          Retry short limit:7   RTS thr:off   Fragment thr:off
-          Power Management:on
-```
-The wireless adapter is named **wlp4s0** in this instance.
-
-To connect to a wireless access point use the following commands:
-``` bash
-sudo iwconfig {ADAPTER_NAME} essid {SSID} key {PASSPHRASE}
-sudo ip link set {ADAPTER_NAME} up
-```
-Use  **ifconfig** to make sure your wireless adapter has been assigned an IP address:
-``` bash
-ifconfig
-```
-you should see output similar to this...
-``` bash
-wlp4s0    Link encap:Ethernet  HWaddr 9c:b6:d0:d3:10:cd
-          inet addr:192.168.1.233  Bcast:192.168.1.255  Mask:255.255.255.0
-          inet6 addr: fe80::e122:ec06:fc44:4552/64 Scope:Link
-          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:11 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:48 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:1000
-          RX bytes:1414 (1.4 KB)  TX bytes:7516 (7.5 KB)
-```
-If you are having issues connecting make sure you entered the SSID and network key correctly or try rebooting to see if the wireless adapter comes up successfully:
-``` bash
-sudo reboot
-```
 ### SSH
 The board comes with SSH enabled out-of-the-box so once you have connected it to your network and determined it's IP address you can connect to it with your favourite SSH client.
 
