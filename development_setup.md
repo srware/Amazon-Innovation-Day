@@ -7,7 +7,7 @@ The Up Squared board comes pre-installed with Ubuntu Server 16.04 which means yo
 The Arduino(R) Create IDE includes a number of example projects to quickly get you up and running communicating with sensors etc...
 
 ## Python
-The Ubuntu Server image come with Python already installed. If you want to work with the **Grove Sensors** using the **MRAA** and **UPM** libraries (recommended) run the following command:
+The Ubuntu Server image comes with Python installed. If you want to work with the **Grove Sensors** using the **MRAA** and **UPM** libraries (recommended) run the following command:
 ``` bash
 sudo apt install python-mraa python-upm
 ```
@@ -15,4 +15,8 @@ sudo apt install python-mraa python-upm
 To install Node.js support run the following command:
 ``` bash
 sudo apt install nodejs nodejs-legacy
+```
+If you want to work with the **Grove Sensors** using the **MRAA** and **UPM** libraries (recommended) run the following command:
+``` bash
+sudo apt install node-mraa node-upm
 ```
