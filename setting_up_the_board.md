@@ -64,6 +64,21 @@ Firstly install Network Manager:
 ``` bash
 sudo apt install network-manager
 ```
+
+Open the Network Manager configuration file:
+``` bash
+sudo vi /etc/NetworkManager/NetworkManager.conf
+```
+Make sure the **managed** parameter is set to **true**:
+``` bash
+[ifupdown]
+managed=true
+```
+Restart the Network Manager service:
+``` bash
+sudo service network-manager restart
+```
+
 Retrieve a list of available wireless access points using the following command:
 ``` bash
 nmcli dev wifi
