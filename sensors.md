@@ -228,33 +228,27 @@ The Temperature & Humidity sensor is an **I2C** sensor so needs to be connected 
 #### Python
 ``` python
 import mraa
-from upm import pyupm_si7005 as upm
-
-# Initialise GrovePi subplatform
-mraa.addSubplatform(mraa.GROVEPI, "0")
+from upm import pyupm_th02 as upm
 
 # Initialise sensor
-sensor = upm.SI7005(0, 512)
+sensor = upm.TH02()
 
-temp = sensor.getTemperatureCelsius()
-hum = sensor.getHumidityRelative()
+temp = sensor.getTemperature()
+hum = sensor.getHumidity()
 
-print("Temperature is currently %d" % temp + " C");
-print("Humidity is currently %d" % hum + " %");
+print("Temperature is currently %d" % temp + " C")
+print("Humidity is currently %d" % hum + " %")
 ```
 #### Node.js
 ``` js
 const mraa = require('mraa');
-const upm = require('jsupm_si7005');
-
-// Initialise GrovePi subplatform
-mraa.addSubplatform(mraa.GROVEPI, "0")
+const upm = require('jsupm_th02');
 
 // Initialise sensor
-var sensor = new upm.SI7005(0, 512)
+var sensor = new upm.TH02();
 
-var temp = sensor.getTemperatureCelsius()
-var hum = sensor.getHumidityRelative()
+var temp = sensor.getTemperature();
+var hum = sensor.getHumidity();
 
 console.log("Temperature is currently " + temp + " C");
 console.log("Humidity is currently " + hum + " %");
